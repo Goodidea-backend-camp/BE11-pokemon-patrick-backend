@@ -11,12 +11,12 @@ class Skilltag extends Model
 
     public function skills()
     {
-        return $this->belongsToMany(Skill::class,'skilltag', 'skill_id', 'id');
+        return $this->belongsToMany(Skill::class, 'skilltag', 'skill_id', 'id');
     }
 
     public function races()
     {
-        return $this->belongsToMany(Race::class, 'skilltag', 'race_id','id');
+        return $this->belongsToMany(Race::class, 'skilltag', 'race_id', 'id');
     }
     protected $fillable = [
         'skill_id',

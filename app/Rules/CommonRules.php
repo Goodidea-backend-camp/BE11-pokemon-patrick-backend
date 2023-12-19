@@ -17,5 +17,5 @@ class CommonRules implements ValidationRule
     {
         //
     }
-   
+
 }

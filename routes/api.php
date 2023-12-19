@@ -48,5 +48,5 @@ Route::post('/skills', [SkillController::class, 'store']);
 Route::get('/skills', [SkillController::class, 'index']);
 Route::put('/skills/{id}', [SkillController::class, 'update']);
 
-Route::post('/upload-Nature-json', [UploadController::class, 'uploadJson']);
-Route::post('/upload-Ability-json', [UploadTwoController::class, 'uploadJson']);
+Route::post('/upload-Nature-json', [UploadNatureController::class, 'uploadJson']);
+Route::post('/upload-Ability-json', [UploadAbilityController::class, 'uploadJson']);
