@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\RaceController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/races/all', [RaceController::class, 'getAllPokemonRaces']);
+Route::get('/email/verify/{code}', [VerificationController::class, 'verify'])->name('verification.verify');

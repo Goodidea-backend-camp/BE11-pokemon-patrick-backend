@@ -15,7 +15,7 @@ class ImportPokemonMoves extends Command
     {
         $response = Http::get('https://pokeapi.co/api/v2/move?limit=918');
         $jsonData = $response->json();
-        
+
         $movesData = $jsonData['results'];
 
         foreach ($movesData as $moveData) {

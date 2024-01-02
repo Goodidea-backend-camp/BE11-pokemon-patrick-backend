@@ -2,41 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NatureRequest;
 use App\Models\Nature;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class NatureController extends Controller
 {
-    public function store(Request $request)
+    public function store(NatureRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:20|unique:natures',
-        ]);
+        $validatedData = $request->validated();
+
         $nature = Nature::create($validatedData);
-        return response()->json(['message' => 'Nature created successfully', 'nature' => $nature], 201);
+        return response()->json(
+            [
+                'success' => config('http_success_message.general.created_successfully'),
+                'nature' => $nature
+            ],
+            Response::HTTP_CREATED
+        );
     }
 
     public function index()
     {
         $natures = Nature::all();
 
-        return response()->json(['natures' => $natures], 200);
+        return response()->json(['natures' => $natures], Response::HTTP_OK);
     }
-    
-    public function update(Request $request, $id)
+
+    public function update(NatureRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:20|unique:natures',
-        ]);
+        $validatedData = $request->validated();
 
         $nature = Nature::find($id);
 
         if (!$nature) {
-            return response()->json(['message' => 'Nature not found'], 404);
+            return response()->json(
+                ['error' => config('http_error_message.general.not_found')],
+                Response::HTTP_NOT_FOUND
+            );
         }
 
         $nature->update($validatedData);
 
-        return response()->json(['message' => 'Nature updated successfully', 'nature' => $nature], 200);
-    }//
+        return response()->json(
+            [
+                'success' => config('http_success_message.general.updated_successfully'),
+                'nature' => $nature
+            ],
+            Response::HTTP_OK
+        );
+    }
 }
